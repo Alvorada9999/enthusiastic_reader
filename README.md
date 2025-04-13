@@ -13,6 +13,7 @@
 - Copy the "enthusiastic_reader/native-host/manifest.json" at "~/.mozilla/native-messaging-hosts/"
 - Update the "path" property of "enthusiastic_reader/native-host/manifest.json" to the absolute path of "enthusiastic_reader/native-host/app.sh"
 
+### On browser side
 - Go to "about:debugging#/runtime/this-firefox" at firefox, click at "Load Temporary Add-on" button and select "enthusiastic_reader/manifest.json"
 
 #### Dependencies
