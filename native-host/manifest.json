@@ -1,0 +1,7 @@
+{
+  "name": "enthusiastic_reader_rpc",
+  "description": "The bridge",
+  "path": "",
+  "type": "stdio",
+  "allowed_extensions": ["kenedyhenrique.buenosilva@gmail.com"]
+}
