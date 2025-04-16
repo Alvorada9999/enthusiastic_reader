@@ -1,4 +1,7 @@
-let client = require('./external_code/discord-rich-presence')('1360799649363132528');
+const clientId = '1360799649363132528'
+const Discord = require('discord-rpc');
+const rpc = new Discord.Client({ transport: 'ipc' });
+rpc.login({ clientId })
 
 let currentWorkTitle = ''
 let currentImage = {
@@ -42,7 +45,7 @@ stdin.on('readable', () => {
 
                     switch(message.action) {
                         case 'update':
-                            client.updatePresence({
+                            rpc.setActivity({
                                 state: `${message.currentChapterTitle}`,
                                 details: `${message.currentWorkTitle}`,
                                 startTimestamp: getStartDate(message.currentWorkTitle),
@@ -52,7 +55,7 @@ stdin.on('readable', () => {
                         break;
                         case 'delete':
                             currentWorkTitle = ''
-                            client.clearActivity()
+                            rpc.clearActivity()
                     }
                 } catch (err) {
                     console.error("Failed to parse JSON message:", err);
