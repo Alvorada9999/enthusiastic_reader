@@ -24,6 +24,7 @@ function getMainDomain(url) {
 }
 
 function sendStatus() {
+  let placeholder = ''
   switch (getMainDomain(currentUrl)) {
     case 'archiveofourown.org':
       chapterTitle = Object.entries(document.getElementsByClassName("title")).filter(x => x['1'].localName === 'h3')['0']['1'].innerText
@@ -32,6 +33,15 @@ function sendStatus() {
     case 'royalroad.com':
       chapterTitle = document.getElementsByClassName('font-white break-word')['0'].innerText
       workTitle = document.getElementsByClassName('font-white inline-block')[0].innerText
+      break;
+    case 'webnovel.com':
+      chapterTitle = document.getElementsByClassName('j_chapIdx')['0'].innerText + ' ' + document.getElementsByClassName('j_chapName')['0'].innerText
+      workTitle = document.getElementsByClassName('lh1 mb16 mla mra oh lh1.2')[0].innerText
+      break;
+    case 'ranobes.net':
+      placeholder = document.getElementsByClassName('h4 title')[0].innerText
+      chapterTitle = placeholder.slice(0, placeholder.indexOf('\n'))
+      workTitle = placeholder.slice(placeholder.indexOf('\n'))
       break;
   }
   browser.runtime.sendMessage({ website: getMainDomain(currentUrl), chapterTitle, workTitle })

@@ -6,7 +6,9 @@ rpc.login({ clientId })
 let currentWorkTitle = ''
 let currentImage = {
     'archiveofourown.org': 'ao3_big_white_background_no_bg',
-    'royalroad.com': 'royal_road_big_white_background_no_bg'
+    'royalroad.com': 'royal_road_big_white_background_no_bg',
+    'webnovel.com': 'webnovel_logo2',
+    'ranobes.net': 'ranobes_logo2'
 }
 let currentStartDate = null
 

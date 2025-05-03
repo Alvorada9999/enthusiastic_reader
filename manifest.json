@@ -10,7 +10,9 @@
     {
       "matches": [
         "*://*.royalroad.com/*",
-        "*://*.archiveofourown.org/*"
+        "*://*.archiveofourown.org/*",
+        "*://*.webnovel.com/*",
+        "*://*.ranobes.net/*"
       ],
       "js": [
         "main.js"

@@ -1,7 +1,7 @@
 {
   "name": "enthusiastic_reader_rpc",
   "description": "The bridge",
-  "path": "",
+  "path": "/home/snake/Downloads/enthusiastic_reader/native-host/app_linux",
   "type": "stdio",
   "allowed_extensions": ["kenedyhenrique.buenosilva@gmail.com"]
 }
