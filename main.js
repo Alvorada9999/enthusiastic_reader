@@ -7,20 +7,7 @@ function getMainDomain(url) {
   const parsedUrl = new URL(url);
   const hostnameParts = parsedUrl.hostname.split('.');
 
-  if (hostnameParts.length <= 2) {
-    return parsedUrl.hostname; // Already a main domain (like example.com)
-  }
-
-  // Handle common public suffixes like co.uk, com.au, etc.
-  const tlds = ['co.uk', 'com.au', 'org.uk']; // Extend as needed
-  const lastTwo = hostnameParts.slice(-2).join('.');
-  const lastThree = hostnameParts.slice(-3).join('.');
-
-  if (tlds.includes(lastTwo)) {
-    return lastThree;
-  }
-
-  return lastTwo;
+  return hostnameParts.slice(-2).join('.');
 }
 
 function sendStatus() {
