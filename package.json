@@ -2,6 +2,7 @@
   "name": "native-host",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -9,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-     "discord-rpc": "github:discordjs/rpc"
+    "discord-rpc-new": "^1.4.1",
+    "ws": "^8.21.0"
   }
 }

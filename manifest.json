@@ -12,10 +12,11 @@
         "*://*.royalroad.com/*",
         "*://*.archiveofourown.org/*",
         "*://*.webnovel.com/*",
-        "*://*.ranobes.net/*"
+        "*://*.ranobes.net/*",
+        "*://*.scribblehub.com/*"
       ],
       "js": [
-        "main.js"
+        "content-script.js"
       ]
     }
   ],
@@ -29,7 +30,7 @@
     "scripts": [
       "background-script.js"
     ],
-    "persistent": false
+    "persistent": true
   },
   "permissions": ["nativeMessaging"]
 }

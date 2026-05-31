@@ -2,6 +2,8 @@ let lastSavedUrl = ''
 let chapterTitle = ''
 let workTitle = ''
 let currentUrl = ''
+console.log("enthusiastic reader")
+const readingSitesUrls = ['archiveofourown.org', 'royalroad.com', 'webnovel.com', 'ranobes.net', 'scribblehub.com'];
 
 function getMainDomain(url) {
   const parsedUrl = new URL(url);
@@ -10,7 +12,7 @@ function getMainDomain(url) {
   return hostnameParts.slice(-2).join('.');
 }
 
-function sendStatus() {
+function getAndSendStatus() {
   let placeholder = ''
   switch (getMainDomain(currentUrl)) {
     case 'archiveofourown.org':
@@ -23,31 +25,33 @@ function sendStatus() {
       break;
     case 'webnovel.com':
       chapterTitle = document.getElementsByClassName('j_chapIdx')['0'].innerText + ' ' + document.getElementsByClassName('j_chapName')['0'].innerText
-      workTitle = document.getElementsByClassName('lh1 mb16 mla mra oh lh1.2')[0].innerText
+      workTitle = document.getElementsByClassName('dib ell vam c_000')[0].innerText
       break;
     case 'ranobes.net':
       placeholder = document.getElementsByClassName('h4 title')[0].innerText
       chapterTitle = placeholder.slice(0, placeholder.indexOf('\n'))
       workTitle = placeholder.slice(placeholder.indexOf('\n'))
       break;
+    case 'scribblehub.com':
+      chapterTitle = document.getElementsByClassName('chapter-title')[0].innerText
+      workTitle = document.getElementsByClassName('chp_byauthor')[0].innerText
   }
-  browser.runtime.sendMessage({ website: getMainDomain(currentUrl), chapterTitle, workTitle })
+  browser.runtime.sendMessage({ website: getMainDomain(currentUrl), chapterTitle, workTitle, chapterLink: currentUrl })
 }
 
 document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "visible") {
-    sendStatus()
+  if (document.visibilityState === "visible" && readingSitesUrls.includes(getMainDomain(currentUrl))) {
+    getAndSendStatus()
   }
 });
 
 (function () {
-  currentUrl = '';
-
   const onUrlChange = () => {
     const newUrl = location.href;
-    if (newUrl !== currentUrl) {
+    console.log(`New url: ${newUrl} - Current url: ${currentUrl}`)
+    if (newUrl !== currentUrl && readingSitesUrls.includes(getMainDomain(newUrl))) {
       currentUrl = newUrl;
-      sendStatus()
+      getAndSendStatus()
     }
   };
 
@@ -66,5 +70,5 @@ document.addEventListener("visibilitychange", () => {
   window.addEventListener("popstate", onUrlChange);
 
   // Fallback interval (for safety)
-  setInterval(onUrlChange, 500);
+  setInterval(onUrlChange, 5000);
 })();
